@@ -236,7 +236,189 @@ If you want to know how long until time t, the function is:
 
 > func Until(t Time) duration
 
-# Examples
+
+## Control Structures
+
+Control structures allow the program to determine where to go next or which 
+path to follow.  They analyze the variables and figure out where to go 
+based on the given parameters.
+
+Types of control structures
+
+- Conditional (selection)
+- Loops (iteration)
+
+### If-Else
+
+```Golang
+If condition {
+	// code that will be executed if the condition is true
+}
+```
+
+Example
+
+```Golang
+package main
+
+import (
+	"fmt"
+)
+
+func main () {
+	var grade = "A"
+	
+	x := true
+	
+	if x {
+		fmt.Println(grade),
+    }
+}
+```
+
+```Golang
+package main
+
+func main() {
+	var condition = true
+	
+	if condition {
+		// code that will be executed if the condition is true
+	} else {
+		// code that will be executed if the condition is false
+	}
+}
+```
+
+Example
+
+```Golang
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	x := 75
+	
+	if x >= 60 {
+		fmt.Println("Pass")
+    } else {
+		fmt.Println("Fail")
+    }
+}
+```
+
+```Golang
+package main
+
+func main() {
+	var condition_1 = true
+	var condition_2 = false
+	
+	if condition_1 {
+		// code that will be executed if the condition_1 is true
+	} else if condition_2 {
+        // code that will be executed if condition_2 is true
+	} else {
+		// code that will be executed if both conditions are false
+	}
+}
+```
+
+### Switch-Case
+
+In Go the control switch runs the first case where the condition is true and
+ignores the remainder.  Switch cases don't need to be constants, and the 
+values don't have to be integers.  You can use commas to separate expressions
+int he case if there is more than one.
+
+Example
+
+```Golang
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	switch time.Now().Weekday() {
+	case time.Saturday, time.Sunday:
+		fmt.Println("It's the weekend")
+	default:
+		fmt.Println("It's a weekday")
+	}
+}
+```
+
+### For
+
+A *for loop* is the only looping construct in Go.  It's used to repeat statements
+until the condition is met.  If there was no condition to be met.
+
+Example
+
+```Golang
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	x := 1
+	
+	for x <= 10 {
+		fmt.Println(x)
+		
+		x += 1
+    }
+}
+```
+
+```Golang
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	x := 1
+	
+	for x := 1 ; x <= 10 ; x++ {
+		fmt.Println(x)
+    }
+}
+```
+
+Example: Adding numbers in a slice
+
+```Golang
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	nums := []int{2,3,4}
+	sum := 0
+	for _, num := range nums {
+		sum += num
+    }
+	
+	fmt.Println("Sum: ", sum)
+}
+```
+
+Note: break and continue can be utilized with conditionals to alter loop flow
+
+
+## Examples
 
 - [Hello](./hello/README.md)
 
