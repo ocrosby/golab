@@ -417,6 +417,77 @@ func main() {
 
 Note: break and continue can be utilized with conditionals to alter loop flow
 
+## Functions
+
+Function names that start with lowercase will only be used within the same 
+package.  A package is a group of source files that are compiled together.
+Names of functions can't start with a digit and can't contain spaces.  If
+the name has multiple words in it, each word after the first should be 
+capitalized, such as simpleFunction.
+
+### Basics of Functions
+
+Example: A function that doesn't have any parameters and doesn't return any 
+values.
+
+```Golang
+func SimpleFunction() {
+	fmt.Println("Hello World!")
+}
+
+func main() {
+	SimpleFunction()
+}
+```
+
+Example: A function that passses arguments
+
+```Golang
+package main
+
+import (
+	"fmt"
+)
+
+func add(x int, y int) {
+	total := x + y
+	
+	fmt.Println(total)
+}
+
+func main() {
+	add(10, 20)
+}
+```
+
+### Return Values and Parameters
+
+If you declare a return value, then you'll also need a return statement.  The
+*return value* is what retrains the function's output after running the 
+instructions.  In Go there's a variety of values.  You can decide whether you
+want to name it or not.
+
+Example: Naked return
+
+```Golang
+package main
+
+import (
+	"fmt"
+)
+
+func greeting(name string) (message string) {
+	message = "Hello, " + name // variable has to be the same name in the header
+	
+	return // since message has een specified no need to declare here
+}
+
+func main() {
+	msg := greeting("world")
+	
+	fmt.Println(msg)
+}
+```
 
 ## Examples
 
