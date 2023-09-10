@@ -1,8 +1,11 @@
-package calculator
+package calculator_test
 
-import "testing"
+import (
+	"golab.com/m/v2/calculator"
+	"testing"
+)
 
-var numberset = []struct {
+var numberSet = []struct {
 	x      int
 	y      int
 	result int
@@ -13,7 +16,7 @@ var numberset = []struct {
 }
 
 func TestAdd(t *testing.T) {
-	result := Add(1, 3)
+	result := calculator.Add(1, 3)
 	if result != 4 {
 		// t.Fail()
 		t.Errorf("Expect 1 + 3 == 4, got %d instead", result)
@@ -21,8 +24,8 @@ func TestAdd(t *testing.T) {
 }
 
 func TestAdds(t *testing.T) {
-	for _, set := range numberset {
-		result := Add(set.x, set.y)
+	for _, set := range numberSet {
+		result := calculator.Add(set.x, set.y)
 
 		if result != set.result {
 			t.Errorf("Expected %d + %d == %d, got %d instead.", set.x, set.y, set.result, result)

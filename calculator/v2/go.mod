@@ -1,4 +1,4 @@
-module github.com/ocrosby/golab/calculator
+module golab.com/m/v2/calculator/v2
 
 go 1.21.1
 
