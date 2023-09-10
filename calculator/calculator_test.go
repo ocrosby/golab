@@ -1,12 +1,12 @@
 package calculator_test
 
 import (
+	. "github.com/ocrosby/golab/calculator"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	. "golab.com/m/v2/calculator"
 )
 
-var numberset = []struct {
+var numberSet = []struct {
 	x      int
 	y      int
 	result int
@@ -19,7 +19,7 @@ var numberset = []struct {
 var _ = Describe("Calculator", func() {
 	Describe("Add", func() {
 		It("Adds two numbers together", func() {
-			for _, set := range numberset {
+			for _, set := range numberSet {
 				Expect(Add(set.x, set.y)).To(Equal(set.result))
 			}
 		})
