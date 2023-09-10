@@ -2,9 +2,9 @@ package User
 
 import (
 	"go.uber.org/mock/gomock"
-	//"golab.com/m/v2/User"
-	"golab.com/m/v2/mocks"
+	"golab.com/m/v2/mocking/mocks"
 	"testing"
+)
 	User
 )
 

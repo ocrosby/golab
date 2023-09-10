@@ -1,7 +1,7 @@
 package User
 
 import (
-	"golab.com/m/v2/IUser"
+	"golab.com/m/v2/mocking/IUser"
 )
 
 type user struct {
