@@ -271,7 +271,7 @@ func main () {
 	x := true
 	
 	if x {
-		fmt.Println(grade),
+		fmt.Println(grade)
     }
 }
 ```
@@ -539,3 +539,4 @@ Using mockgen to generate mocks (from the root)
 - [Recorded Talks](https://go.dev/talks/)
 - [Frequently Asked Questions](https://go.dev/doc/faq)
 - [Testing with GoMock](https://gist.github.com/thiagozs/4276432d12c2e5b152ea15b3f8b0012e)
+- [Using Go Modules](https://go.dev/blog/using-go-modules)
