@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/ocrosby/golab/jsonplaceholder/models"
+	pkg2 "github.com/ocrosby/golab/jsonplaceholder/pkg/http"
 	"io"
 	"net/http"
 )
@@ -29,13 +30,22 @@ type IPostService interface {
 }
 
 type PostService struct {
+	client  pkg2.IHttpClient
 	context context.Context
 }
 
-func NewPostService() *PostService {
+// NewPostService creates a new PostService
+//
+// If the specified client is nil, the default http client will be used
+func NewPostService(client pkg2.IHttpClient) *PostService {
 	svc := new(PostService)
 
+	if client == nil {
+		client = http.DefaultClient
+	}
+
 	svc.context = context.Background()
+	svc.client = client
 
 	return svc
 }
@@ -53,7 +63,7 @@ func (service *PostService) GetAll() ([]*models.Post, error) {
 		return nil, err
 	}
 
-	res, err := http.DefaultClient.Do(req)
+	res, err := service.client.Do(req)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +94,7 @@ func (service *PostService) GetByID(id int) (*models.Post, error) {
 		return nil, err
 	}
 
-	res, err := http.DefaultClient.Do(req)
+	res, err := service.client.Do(req)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +121,7 @@ func (service *PostService) GetByUserId(userId int) ([]*models.Post, error) {
 		return nil, err
 	}
 
-	res, err := http.DefaultClient.Do(req)
+	res, err := service.client.Do(req)
 	if err != nil {
 		return nil, err
 	}
@@ -147,7 +157,7 @@ func (service *PostService) Create(post *models.Post) (*models.Post, error) {
 		return nil, err
 	}
 
-	res, err := http.DefaultClient.Do(req)
+	res, err := service.client.Do(req)
 	if err != nil {
 		return nil, err
 	}
@@ -184,7 +194,7 @@ func (service *PostService) UpdateById(id int, post *models.Post) (*models.Post,
 		return nil, err
 	}
 
-	res, err := http.DefaultClient.Do(req)
+	res, err := service.client.Do(req)
 	if err != nil {
 		return nil, err
 	}
@@ -209,7 +219,7 @@ func (service *PostService) DeleteById(id int) error {
 		return err
 	}
 
-	_, err = http.DefaultClient.Do(pRequest)
+	_, err = service.client.Do(pRequest)
 	if err != nil {
 		return err
 	}
@@ -267,7 +277,7 @@ func (service *PostService) PatchById(id int, post *models.Post) (*models.Post, 
 		return nil, err
 	}
 
-	res, err := http.DefaultClient.Do(req)
+	res, err := service.client.Do(req)
 	if err != nil {
 		return nil, err
 	}
