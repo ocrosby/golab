@@ -11,7 +11,7 @@ var _ = Describe("Post", func() {
 	var service *services.PostService
 
 	BeforeEach(func() {
-		service = services.NewPostService()
+		service = services.NewPostService(nil) // passing nil will use the default http client
 	})
 
 	AfterEach(func() {
