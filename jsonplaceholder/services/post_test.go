@@ -1,10 +1,10 @@
 package services_test
 
 import (
+	"github.com/ocrosby/golab/jsonplaceholder/models"
+	"github.com/ocrosby/golab/jsonplaceholder/services"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"golab.com/m/v2/jsonplaceholder/models"
-	"golab.com/m/v2/jsonplaceholder/services"
 )
 
 var _ = Describe("Post", func() {

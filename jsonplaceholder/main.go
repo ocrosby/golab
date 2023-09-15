@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"golab.com/m/v2/jsonplaceholder/services"
+	"github.com/ocrosby/golab/jsonplaceholder/services"
 )
 
 func main() {

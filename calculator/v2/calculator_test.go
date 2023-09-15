@@ -1,9 +1,9 @@
 package calculator_test
 
 import (
+	"github.com/ocrosby/golab/calculator/v2"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"golab.com/m/v2/calculator/v2"
 )
 
 var numberSet = []struct {

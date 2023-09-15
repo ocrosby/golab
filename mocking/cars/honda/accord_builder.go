@@ -1,6 +1,6 @@
 package honda
 
-//go:generate mockgen -destination=./mock_accord_builder.go -package=honda golab.com/m/v2/mocking/cars/honda IAccordBuilder
+//go:generate mockgen -destination=./mock_accord_builder.go -package=honda github.com/ocrosby/golab/mocking/cars/honda IAccordBuilder
 
 import "fmt"
 

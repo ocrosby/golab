@@ -2,7 +2,7 @@ package honda
 
 import (
 	"fmt"
-	"golab.com/m/v2/mocking"
+	"github.com/ocrosby/golab/mocking"
 )
 
 // Accord is a car

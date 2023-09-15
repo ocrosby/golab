@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"golab.com/m/v2/jsonplaceholder/models"
+	"github.com/ocrosby/golab/jsonplaceholder/models"
 	"io"
 	"net/http"
 )

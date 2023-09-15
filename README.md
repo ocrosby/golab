@@ -502,7 +502,7 @@ func main() {
 
 Initializing the root module
 
-> go mod init golab.com/m/v2
+> go mod init github.com/ocrosby/golab
 
 Adding module requirements and sums
 
@@ -527,7 +527,7 @@ Installing mockgen
 
 Using mockgen to generate mocks (from the root)
 
-> mockgen -destination=mocks/mockRunner.go -package=mocks golab.com/m/v2/IUser IUserInterface
+> mockgen -destination=mocks/mockRunner.go -package=mocks github.com/ocrosby/golab/IUser IUserInterface
 
 ## References
 
