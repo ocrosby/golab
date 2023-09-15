@@ -1,7 +1,7 @@
 package calculator_test
 
 import (
-	"golab.com/m/v2/calculator"
+	"github.com/ocrosby/golab/calculator/v1"
 	"testing"
 )
 

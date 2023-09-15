@@ -1,4 +1,4 @@
-module golab.com/m/v2
+module github.com/ocrosby/golab
 
 go 1.19
 

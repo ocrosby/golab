@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"golab.com/m/v2/jsonplaceholder/models"
+	"io"
 	"net/http"
 )
 
@@ -47,19 +48,22 @@ func NewPostService() *PostService {
 func (service *PostService) GetAll() ([]*models.Post, error) {
 	var posts []*models.Post
 
-	pRequest, err := http.NewRequestWithContext(service.context, http.MethodGet, PostsEndpoint, nil)
+	req, err := http.NewRequestWithContext(service.context, http.MethodGet, PostsEndpoint, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	pResponse, err := http.DefaultClient.Do(pRequest)
+	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
-	defer pResponse.Body.Close()
+	defer func(body io.ReadCloser) {
+		if err := body.Close(); err != nil {
+			fmt.Println("closing response body encountered an error: " + err.Error())
+		}
+	}(res.Body)
 
-	err = json.NewDecoder(pResponse.Body).Decode(&posts)
-	if err != nil {
+	if err = json.NewDecoder(res.Body).Decode(&posts); err != nil {
 		return nil, err
 	}
 
@@ -75,17 +79,17 @@ func (service *PostService) GetByID(id int) (*models.Post, error) {
 	var post *models.Post
 
 	postByIdEndpoint := fmt.Sprintf(PostEndpoint, id)
-	pRequest, err := http.NewRequestWithContext(service.context, http.MethodGet, postByIdEndpoint, nil)
+	req, err := http.NewRequestWithContext(service.context, http.MethodGet, postByIdEndpoint, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	pResponse, err := http.DefaultClient.Do(pRequest)
+	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
 
-	err = json.NewDecoder(pResponse.Body).Decode(&post)
+	err = json.NewDecoder(res.Body).Decode(&post)
 	if err != nil {
 		return nil, err
 	}
@@ -102,17 +106,17 @@ func (service *PostService) GetByUserId(userId int) ([]*models.Post, error) {
 	var posts []*models.Post
 
 	postsByUserIdEndpoint := fmt.Sprintf(PostsByUserIdEndpoint, userId)
-	pRequest, err := http.NewRequestWithContext(service.context, http.MethodGet, postsByUserIdEndpoint, nil)
+	req, err := http.NewRequestWithContext(service.context, http.MethodGet, postsByUserIdEndpoint, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	pResponse, err := http.DefaultClient.Do(pRequest)
+	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
 
-	err = json.NewDecoder(pResponse.Body).Decode(&posts)
+	err = json.NewDecoder(res.Body).Decode(&posts)
 	if err != nil {
 		return nil, err
 	}
@@ -138,17 +142,17 @@ func (service *PostService) Create(post *models.Post) (*models.Post, error) {
 		return nil, err
 	}
 
-	pRequest, err := http.NewRequestWithContext(service.context, http.MethodPost, PostsEndpoint, &buf)
+	req, err := http.NewRequestWithContext(service.context, http.MethodPost, PostsEndpoint, &buf)
 	if err != nil {
 		return nil, err
 	}
 
-	pResponse, err := http.DefaultClient.Do(pRequest)
+	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
 
-	err = json.NewDecoder(pResponse.Body).Decode(&createdPost)
+	err = json.NewDecoder(res.Body).Decode(&createdPost)
 	if err != nil {
 		return nil, err
 	}
@@ -175,17 +179,17 @@ func (service *PostService) UpdateById(id int, post *models.Post) (*models.Post,
 	}
 
 	postByIdEndpoint := fmt.Sprintf(PostEndpoint, id)
-	pRequest, err := http.NewRequestWithContext(service.context, http.MethodPut, postByIdEndpoint, &buf)
+	req, err := http.NewRequestWithContext(service.context, http.MethodPut, postByIdEndpoint, &buf)
 	if err != nil {
 		return nil, err
 	}
 
-	pResponse, err := http.DefaultClient.Do(pRequest)
+	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
 
-	err = json.NewDecoder(pResponse.Body).Decode(&updatedPost)
+	err = json.NewDecoder(res.Body).Decode(&updatedPost)
 	if err != nil {
 		return nil, err
 	}
@@ -258,17 +262,17 @@ func (service *PostService) PatchById(id int, post *models.Post) (*models.Post, 
 	// TODO: Use reflection to get the fields that have been updated
 
 	postByIdEndpoint := fmt.Sprintf(PostEndpoint, id)
-	pRequest, err := http.NewRequestWithContext(service.context, http.MethodPatch, postByIdEndpoint, nil)
+	req, err := http.NewRequestWithContext(service.context, http.MethodPatch, postByIdEndpoint, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	pResponse, err := http.DefaultClient.Do(pRequest)
+	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
 
-	err = json.NewDecoder(pResponse.Body).Decode(&patchedPost)
+	err = json.NewDecoder(res.Body).Decode(&patchedPost)
 	if err != nil {
 		return nil, err
 	}
