@@ -58,7 +58,12 @@ func NewPostService(client pkg2.IHttpClient) *PostService {
 func (service *PostService) GetAll() ([]*models.Post, error) {
 	var posts []*models.Post
 
-	req, err := http.NewRequestWithContext(service.context, http.MethodGet, PostsEndpoint, nil)
+	method := http.MethodGet
+	url := PostsEndpoint
+
+	fmt.Println(method, url)
+
+	req, err := http.NewRequestWithContext(service.context, method, url, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -88,8 +93,10 @@ func (service *PostService) GetAll() ([]*models.Post, error) {
 func (service *PostService) GetByID(id int) (*models.Post, error) {
 	var post *models.Post
 
-	postByIdEndpoint := fmt.Sprintf(PostEndpoint, id)
-	req, err := http.NewRequestWithContext(service.context, http.MethodGet, postByIdEndpoint, nil)
+	method := http.MethodGet
+	url := fmt.Sprintf(PostEndpoint, id)
+
+	req, err := http.NewRequestWithContext(service.context, method, url, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -115,8 +122,10 @@ func (service *PostService) GetByID(id int) (*models.Post, error) {
 func (service *PostService) GetByUserId(userId int) ([]*models.Post, error) {
 	var posts []*models.Post
 
-	postsByUserIdEndpoint := fmt.Sprintf(PostsByUserIdEndpoint, userId)
-	req, err := http.NewRequestWithContext(service.context, http.MethodGet, postsByUserIdEndpoint, nil)
+	method := http.MethodGet
+	url := fmt.Sprintf(PostsByUserIdEndpoint, userId)
+
+	req, err := http.NewRequestWithContext(service.context, method, url, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -152,7 +161,10 @@ func (service *PostService) Create(post *models.Post) (*models.Post, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequestWithContext(service.context, http.MethodPost, PostsEndpoint, &buf)
+	method := http.MethodPost
+	url := PostsEndpoint
+
+	req, err := http.NewRequestWithContext(service.context, method, url, &buf)
 	if err != nil {
 		return nil, err
 	}
